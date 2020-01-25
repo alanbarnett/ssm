@@ -6,7 +6,7 @@
 /*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:24:43 by abarnett          #+#    #+#             */
-/*   Updated: 2020/01/25 03:40:11 by abarnett         ###   ########.fr       */
+/*   Updated: 2020/01/25 07:26:09 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 
 // Constructors
 
-IMonitorModule::IMonitorModule(const std::string &title)
+IMonitorModule::IMonitorModule(void)
 {
-	std::cout << "Default constructor called for " << title << std::endl;
-	_title = title;
+	std::cout << "Default module constructor called" << std::endl;
 }
 
 IMonitorModule::~IMonitorModule(void)
@@ -30,15 +29,22 @@ IMonitorModule::~IMonitorModule(void)
 
 IMonitorModule::IMonitorModule(const IMonitorModule& other)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Copy constructor called for " << _title << std::endl;
 	*this = other;
 }
 
 IMonitorModule&	IMonitorModule::operator = (const IMonitorModule& other)
 {
-	std::cout << "Assignment operator called" << std::endl;
+	std::cout << "Assignment operator called for " << _title << std::endl;
 	_title = other.get_title();
 	return (*this);
+}
+
+// Mutators
+
+void			IMonitorModule::set_title(const std::string &title)
+{
+	_title = title;
 }
 
 // Accessors
@@ -46,12 +52,4 @@ IMonitorModule&	IMonitorModule::operator = (const IMonitorModule& other)
 std::string		IMonitorModule::get_title(void) const
 {
 	return (_title);
-}
-
-// Other
-
-void			IMonitorModule::display(const IMonitorDisplay &display) const
-{
-	display.draw_line_2("hostname", "e1z2r3p10");
-	display.draw_bar("ram", 65);
 }
