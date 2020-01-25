@@ -6,7 +6,7 @@
 #    By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/13 19:16:51 by abarnett          #+#    #+#              #
-#    Updated: 2020/01/25 07:46:52 by abarnett         ###   ########.fr        #
+#    Updated: 2020/01/25 08:01:18 by abarnett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ $(NAME):	$(OBJS)
 clean:
 	$(RM) $(OBJS)
 	$(RM) $(DEPS)
+	$(RM) tags
 
 fclean:		clean
 	$(RM) $(NAME)
