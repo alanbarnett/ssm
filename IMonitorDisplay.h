@@ -21,7 +21,7 @@ class	IMonitorDisplay
 {
 	public:
 		// Constructors
-		IMonitorDisplay(unsigned int width = 40);
+		IMonitorDisplay(unsigned int width = 36);
 		~IMonitorDisplay(void);
 		IMonitorDisplay(const IMonitorDisplay &other);
 		IMonitorDisplay &operator = (const IMonitorDisplay &other);
@@ -32,12 +32,15 @@ class	IMonitorDisplay
 		// Displaying
 		void			display_module(IMonitorModule *module) const;
 		void			refresh_modules(void) const;
+
+		// Drawing
 		void			draw_title(const std::string &title) const;
 		void			draw_line(const std::string &line) const;
+		void			draw_line_separator(char c) const;
 		void			draw_line_center(const std::string &line) const;
-		void			draw_bar(const std::string &title, int percent) const;
 		void			draw_line_2(const std::string &line1,
 									const std::string &line2) const;
+		void			draw_bar(const std::string &title, int percent) const;
 
 	private:
 		void			resize(void);

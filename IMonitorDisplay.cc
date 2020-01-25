@@ -93,19 +93,22 @@ void	IMonitorDisplay::refresh_modules(void) const
 	}
 }
 
+// Drawing
+
 void	IMonitorDisplay::draw_title(const std::string &title) const
 {
 	draw_line_center(title);
-	for (unsigned int i = 0; i < _width; ++i)
-	{
-		std::cout << "-";
-	}
-	std::cout << "\n";
+	draw_line_separator('-');
 }
 
 void	IMonitorDisplay::draw_line(const std::string &line) const
 {
 	std::cout << line << "\n";
+}
+
+void	IMonitorDisplay::draw_line_separator(char c) const
+{
+	std::cout << std::string(_width, c) << "\n";
 }
 
 void	IMonitorDisplay::draw_line_center(const std::string &line) const
