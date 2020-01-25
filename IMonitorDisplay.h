@@ -6,14 +6,14 @@
 /*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:43:27 by abarnett          #+#    #+#             */
-/*   Updated: 2020/01/25 03:52:46 by abarnett         ###   ########.fr       */
+/*   Updated: 2020/01/25 06:46:23 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IMONITORDISPLAY_H
 # define IMONITORDISPLAY_H
 
-#include <list>
+#include <string>
 
 class	IMonitorModule;
 
@@ -27,10 +27,10 @@ class	IMonitorDisplay
 		IMonitorDisplay &operator = (const IMonitorDisplay &other);
 
 		// Mutators
-		void			add_module(IMonitorModule module);
+		void			add_module(IMonitorModule *module);
 
-		// Other
-		void			display_module(const IMonitorModule &module) const;
+		// Displaying
+		void			display_module(IMonitorModule *module) const;
 		void			refresh_modules(void) const;
 		void			draw_title(const std::string &title) const;
 		void			draw_line(const std::string &line) const;
@@ -40,8 +40,12 @@ class	IMonitorDisplay
 									const std::string &line2) const;
 
 	private:
-		std::list<IMonitorModule>	_modules;
-		unsigned int				_width;
+		void			resize(void);
+
+		IMonitorModule	**_modules;
+		unsigned int	_modules_count;
+		unsigned int	_modules_max;
+		unsigned int	_width;
 };
 
 #endif

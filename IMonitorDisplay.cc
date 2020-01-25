@@ -6,7 +6,7 @@
 /*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:43:28 by abarnett          #+#    #+#             */
-/*   Updated: 2020/01/25 04:10:08 by abarnett         ###   ########.fr       */
+/*   Updated: 2020/01/25 06:46:00 by abarnett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "IMonitorModule.h"
 #include <iostream>
 #include <iomanip>
-#include <list>
+#include <string>
 
 // Constructors
 
@@ -22,11 +22,19 @@ IMonitorDisplay::IMonitorDisplay(unsigned int width)
 {
 	std::cout << "Default constructor called for display\n";
 	_width = width;
+	_modules_count = 0;
+	_modules_max = 8;
+	_modules = new IMonitorModule* [_modules_max];
 }
 
 IMonitorDisplay::~IMonitorDisplay(void)
 {
 	std::cout << "Destructor called for display\n";
+	for (unsigned int i = 0; i < _modules_count; ++i)
+	{
+		delete _modules[i];
+	}
+	delete[] _modules;
 }
 
 IMonitorDisplay::IMonitorDisplay(const IMonitorDisplay& other)
@@ -39,32 +47,49 @@ IMonitorDisplay&	IMonitorDisplay::operator = (const IMonitorDisplay& other)
 {
 	std::cout << "Assignment operator called\n";
 	(void)other;
+	// TODO Implement this actually!
 	return (*this);
 }
 
 // Mutators
 
-void	IMonitorDisplay::add_module(IMonitorModule module)
+void	IMonitorDisplay::resize(void)
 {
-	_modules.push_back(module);
+	IMonitorModule	**new_modules;
+
+	_modules_max *= 2;
+	new_modules = new IMonitorModule* [_modules_max];
+	for (unsigned int i = 0; i < _modules_count; ++i)
+	{
+		new_modules[i] = _modules[i];
+	}
+	delete[] _modules;
+	_modules = new_modules;
 }
 
-// Other
-
-void	IMonitorDisplay::display_module(const IMonitorModule &module) const
+void	IMonitorDisplay::add_module(IMonitorModule *module)
 {
-	draw_title(module.get_title());
-	module.display(*this);
+	if (_modules_count == _modules_max)
+	{
+		resize();
+	}
+	_modules[_modules_count] = module;
+	++_modules_count;
+}
+
+// Displaying
+
+void	IMonitorDisplay::display_module(IMonitorModule *module) const
+{
+	draw_title(module->get_title());
+	module->display(*this);
 }
 
 void	IMonitorDisplay::refresh_modules(void) const
 {
-	std::list<IMonitorModule>::const_iterator	it;
-	std::list<IMonitorModule>::const_iterator	it_end = _modules.end();
-
-	for (it = _modules.begin(); it != it_end; ++it)
+	for (unsigned int i = 0; i < _modules_count; ++i)
 	{
-		display_module(*it);
+		display_module(_modules[i]);
 	}
 }
 
