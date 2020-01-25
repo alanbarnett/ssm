@@ -1,0 +1,6 @@
+rush01.en.pdf
+*.o
+*.d
+stats
+tags
+tags.vim
