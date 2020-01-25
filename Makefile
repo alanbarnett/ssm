@@ -6,12 +6,12 @@
 #    By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/13 19:16:51 by abarnett          #+#    #+#              #
-#    Updated: 2020/01/25 04:11:53 by abarnett         ###   ########.fr        #
+#    Updated: 2020/01/25 06:20:18 by abarnett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME :=		stats
-SRCS :=		main.cc IMonitorModule.cc IMonitorDisplay.cc
+SRCS :=		main.cc IMonitorModule.cc IMonitorDisplay.cc HostnameModule.cc
 OBJS :=		$(patsubst %.cc,%.o,$(SRCS))
 
 CXX :=		clang++
