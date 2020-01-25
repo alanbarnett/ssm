@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   IMonitorModule.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarnett <alanbarnett328@gmail.com>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:24:42 by abarnett          #+#    #+#             */
+/*   Updated: 2020/01/25 03:41:07 by abarnett         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef IMONITORMODULE_H
+# define IMONITORMODULE_H
+
+#include <string>
+
+class	IMonitorDisplay;
+
+class	IMonitorModule
+{
+	public:
+		// Constructors
+		IMonitorModule(const std::string &title = "Unnamed");
+		~IMonitorModule(void);
+		IMonitorModule(const IMonitorModule &other);
+		IMonitorModule &operator = (const IMonitorModule &other);
+
+		// Accessors
+		std::string	get_title(void) const;
+
+		// Other
+		void	display(const IMonitorDisplay &display) const;
+
+	private:
+		std::string	_title;
+};
+
+/*
+** Should contain the things a module would want to draw
+*/
+
+#endif
